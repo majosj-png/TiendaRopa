@@ -1,0 +1,53 @@
+@host = http://localhost:5030
+
+### Listar categorías (datos del seeding)
+GET {{host}}/categorias
+
+### Obtener una categoría
+GET {{host}}/categorias/1
+
+### Prendas de una categoría
+GET {{host}}/categorias/3/prendas
+
+### Crear categoría
+POST {{host}}/categorias
+Content-Type: application/json
+
+{
+  "nombre": "Calzado"
+}
+
+### Listar prendas
+GET {{host}}/prendas
+
+### Obtener una prenda
+GET {{host}}/prendas/1
+
+### Crear prenda
+POST {{host}}/prendas
+Content-Type: application/json
+
+{
+  "nombre": "Camisa a cuadros",
+  "talla": "M",
+  "color": "Rojo",
+  "precio": 27000,
+  "stock": 9,
+  "categoriaId": 1
+}
+
+### Actualizar prenda
+PUT {{host}}/prendas/1
+Content-Type: application/json
+
+{
+  "nombre": "Remera básica algodón",
+  "talla": "M",
+  "color": "Blanco",
+  "precio": 11000,
+  "stock": 25,
+  "categoriaId": 1
+}
+
+### Eliminar prenda
+DELETE {{host}}/prendas/6
