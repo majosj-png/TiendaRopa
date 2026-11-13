@@ -11,4 +11,7 @@ public class Prenda
 
     public int CategoriaId { get; set; }
     public Categoria? Categoria { get; set; }
+
+    public int EstacionId { get; set; }
+    public Estacion? Estacion { get; set; }
 }

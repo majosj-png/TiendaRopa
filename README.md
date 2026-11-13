@@ -35,7 +35,11 @@ TiendaRopa.http                       → peticiones de prueba
 | GET | /categorias/{id} | Una categoría |
 | GET | /categorias/{id}/prendas | Prendas de una categoría |
 | POST | /categorias | Crear categoría |
-| GET | /prendas | Lista de prendas |
+| GET | /estaciones | Lista de estaciones con su número de prendas |
+| GET | /estaciones/{id} | Una estación |
+| GET | /estaciones/{id}/prendas | Prendas de una estación |
+| POST | /estaciones | Crear estación |
+| GET | /prendas | Lista de prendas (incluye categoría y estación) |
 | GET | /prendas/{id} | Una prenda |
 | POST | /prendas | Crear prenda |
 | PUT | /prendas/{id} | Actualizar |
@@ -45,7 +49,8 @@ Documento OpenAPI: http://localhost:5030/openapi/v1.json
 
 ## Datos del seed
 - Categorías: Remeras, Pantalones, Abrigos
-- 6 prendas con talla, color, precio y stock
+- Estaciones: Verano, Primavera, Otoño, Invierno
+- 6 prendas con talla, color, precio, stock, categoría y estación
 
 ## Cambiar los datos del seed
 1. Edita `HasData(...)` en `Data/AppDbContext.cs`.

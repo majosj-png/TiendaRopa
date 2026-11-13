@@ -17,6 +17,23 @@ Content-Type: application/json
   "nombre": "Calzado"
 }
 
+### Listar estaciones
+GET {{host}}/estaciones
+
+### Obtener una estación
+GET {{host}}/estaciones/1
+
+### Prendas de una estación
+GET {{host}}/estaciones/4/prendas
+
+### Crear estación
+POST {{host}}/estaciones
+Content-Type: application/json
+
+{
+  "nombre": "Todo el año"
+}
+
 ### Listar prendas
 GET {{host}}/prendas
 
@@ -33,7 +50,8 @@ Content-Type: application/json
   "color": "Rojo",
   "precio": 27000,
   "stock": 9,
-  "categoriaId": 1
+  "categoriaId": 1,
+  "estacionId": 1
 }
 
 ### Actualizar prenda
@@ -46,7 +64,8 @@ Content-Type: application/json
   "color": "Blanco",
   "precio": 11000,
   "stock": 25,
-  "categoriaId": 1
+  "categoriaId": 1,
+  "estacionId": 1
 }
 
 ### Eliminar prenda

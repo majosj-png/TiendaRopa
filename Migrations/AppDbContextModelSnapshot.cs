@@ -56,6 +56,46 @@ namespace TiendaRopa.Migrations
                         });
                 });
 
+            modelBuilder.Entity("TiendaRopa.Models.Estacion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Estaciones");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Nombre = "Verano"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Nombre = "Primavera"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Nombre = "Otoño"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Nombre = "Invierno"
+                        });
+                });
+
             modelBuilder.Entity("TiendaRopa.Models.Prenda", b =>
                 {
                     b.Property<int>("Id")
@@ -71,6 +111,9 @@ namespace TiendaRopa.Migrations
                         .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("character varying(40)");
+
+                    b.Property<int>("EstacionId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -93,6 +136,8 @@ namespace TiendaRopa.Migrations
 
                     b.HasIndex("CategoriaId");
 
+                    b.HasIndex("EstacionId");
+
                     b.ToTable("Prendas");
 
                     b.HasData(
@@ -101,6 +146,7 @@ namespace TiendaRopa.Migrations
                             Id = 1,
                             CategoriaId = 1,
                             Color = "Blanco",
+                            EstacionId = 1,
                             Nombre = "Remera básica algodón",
                             Precio = 12000m,
                             Stock = 30,
@@ -111,6 +157,7 @@ namespace TiendaRopa.Migrations
                             Id = 2,
                             CategoriaId = 1,
                             Color = "Negro",
+                            EstacionId = 1,
                             Nombre = "Remera estampada",
                             Precio = 15000m,
                             Stock = 18,
@@ -121,6 +168,7 @@ namespace TiendaRopa.Migrations
                             Id = 3,
                             CategoriaId = 2,
                             Color = "Azul",
+                            EstacionId = 4,
                             Nombre = "Jean recto",
                             Precio = 35000m,
                             Stock = 12,
@@ -131,6 +179,7 @@ namespace TiendaRopa.Migrations
                             Id = 4,
                             CategoriaId = 2,
                             Color = "Gris",
+                            EstacionId = 3,
                             Nombre = "Jogger",
                             Precio = 22000m,
                             Stock = 20,
@@ -141,6 +190,7 @@ namespace TiendaRopa.Migrations
                             Id = 5,
                             CategoriaId = 3,
                             Color = "Celeste",
+                            EstacionId = 3,
                             Nombre = "Campera de jean",
                             Precio = 48000m,
                             Stock = 6,
@@ -151,6 +201,7 @@ namespace TiendaRopa.Migrations
                             Id = 6,
                             CategoriaId = 3,
                             Color = "Verde",
+                            EstacionId = 4,
                             Nombre = "Buzo con capucha",
                             Precio = 32000m,
                             Stock = 10,
@@ -166,10 +217,23 @@ namespace TiendaRopa.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("TiendaRopa.Models.Estacion", "Estacion")
+                        .WithMany("Prendas")
+                        .HasForeignKey("EstacionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.Navigation("Categoria");
+
+                    b.Navigation("Estacion");
                 });
 
             modelBuilder.Entity("TiendaRopa.Models.Categoria", b =>
+                {
+                    b.Navigation("Prendas");
+                });
+
+            modelBuilder.Entity("TiendaRopa.Models.Estacion", b =>
                 {
                     b.Navigation("Prendas");
                 });
